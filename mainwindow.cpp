@@ -121,7 +121,7 @@ void MainWindow::onRestoreItems()
     if (ret == QMessageBox::Yes) {
         ItemManager::getInstance()->restoreFromBackup();
         //logMessage("Items restored from backup");
-        mStatusBar->showMessage("Items restored from backup", 3000);
+        //mStatusBar->showMessage("Items restored from backup", 3000);
         //mBroadcaster = new UdpBroadcaster(this);
 
         if (!mBroadcaster) {
