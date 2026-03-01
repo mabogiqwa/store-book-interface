@@ -259,6 +259,7 @@ void MainWindow::setupMenus()
 
     mCreateBackupItemsAction = new QAction("&Backup Items", this);
     mCreateBackupItemsAction->setStatusTip("Backup items");
+    mDataMenu->addAction(mCreateBackupItemsAction);
 
     //Network Menu
     mNetworkMenu = menuBar()->addMenu("&Network");
