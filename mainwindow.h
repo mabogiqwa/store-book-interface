@@ -113,4 +113,9 @@ private:
     void updateActions();
     void logMessage(const QString &message);
 };
+
+inline void MainWindow::onCreateBackup()
+{
+
+}
 #endif // MAINWINDOW_H
