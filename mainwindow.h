@@ -82,7 +82,7 @@ private:
     QAction *mAddCustomerAction;
     QAction *mAddItemAction;
     QAction *mCreateTransactionAction;
-    QAction *mCreateBackup;
+    QAction *mCreateBackupItemsAction;
     QAction *mRestoreItemsAction;
     QAction *mStartBroadcastAction;
     QAction *mStopBroadcastAction;

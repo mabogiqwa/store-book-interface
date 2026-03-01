@@ -251,18 +251,14 @@ void MainWindow::setupMenus()
 
     mDataMenu->addSeparator();
 
-    /*
-    mCreateTransactionAction = new QAction("Create &Transaction", this);
-    mCreateTransactionAction->setShortcut(QKeySequence("Ctrl+T"));
-    mCreateTransactionAction->setStatusTip("Create a new transaction");
-    mDataMenu->addAction(mCreateTransactionAction);
-    */
-
-    //mDataMenu->addSeparator();
-
     mRestoreItemsAction = new QAction("&Restore Items", this);
     mRestoreItemsAction->setStatusTip("Restore items from backup");
     mDataMenu->addAction(mRestoreItemsAction);
+
+    mDataMenu->addSeparator();
+
+    mCreateBackupItemsAction = new QAction("&Backup Items", this);
+    mCreateBackupItemsAction->setStatusTip("Backup items");
 
     //Network Menu
     mNetworkMenu = menuBar()->addMenu("&Network");
