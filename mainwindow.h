@@ -39,7 +39,21 @@ private slots:
     void onAddCustomer();
     void onAddItem();
     void onCreateTransaction();
-    void onRestoreItems();
+    void onRestoreItems()
+    {
+        int ret = QMessageBox::question(this,"Restore Items","Are you sure you want to restore items from backup? This will replace the current item list.", QMessageBox::Yes, QMessageBox::No);
+        //qDebug() << "the question was asked";
+        if (ret == QMessageBox::Yes) {
+            ItemManager::getInstance()->restoreFromBackup();
+
+            if (!mBroadcaster) {
+                mBroadcaster = new UdpBroadcaster(this);
+                connect(mBroadcaster, &UdpBroadcaster::broadcastSent, this, &MainWindow::onBroadcastSent);
+            }
+
+        }
+    }
+    void onCreateBackup();
     void onStartBroadcast();
     void onStopBroadcast();
     void onAbout();
@@ -68,6 +82,7 @@ private:
     QAction *mAddCustomerAction;
     QAction *mAddItemAction;
     QAction *mCreateTransactionAction;
+    QAction *mCreateBackup;
     QAction *mRestoreItemsAction;
     QAction *mStartBroadcastAction;
     QAction *mStopBroadcastAction;
@@ -88,6 +103,7 @@ private:
 
     QString generateXMLData();
 
+    //Setting up UI
     void setupUI();
     void setupMenus();
     void setupToolBar();
