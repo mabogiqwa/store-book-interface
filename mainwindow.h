@@ -53,7 +53,21 @@ private slots:
 
         }
     }
-    void onCreateBackup();
+    void onCreateBackup()
+    {
+        ItemManager *manager = ItemManager::getInstance();
+        if (!manager) {
+            QMessageBox::critical(this, "Error", "nullptr was returned.");
+            return;
+        }
+
+        int ret = QMessageBox::question(this, "Backup Items", "Are you sure oyu want to backup the current item list?", QMessageBox::Yes, QMessageBox::No);
+
+        if (ret == QMessageBox::Yes) {
+            manager->createBackup();
+            mStatusBar->showMessage("Items backed successfully", 3000);
+        }
+    }
     void onStartBroadcast();
     void onStopBroadcast();
     void onAbout();
@@ -114,8 +128,5 @@ private:
     void logMessage(const QString &message);
 };
 
-inline void MainWindow::onCreateBackup()
-{
 
-}
 #endif // MAINWINDOW_H

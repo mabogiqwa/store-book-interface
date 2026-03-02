@@ -245,7 +245,6 @@ void MainWindow::setupMenus()
     mDataMenu = menuBar()->addMenu("&Data");
 
     mAddCustomerAction = new QAction("&Add Customer", this);
-    mAddCustomerAction->setShortcut(QKeySequence("Ctrl+U"));
     mAddCustomerAction->setStatusTip("Add a new customer.");
     mDataMenu->addAction(mAddCustomerAction);
 
@@ -348,6 +347,9 @@ void MainWindow::setupConnections()
     if (mOpenReceiverAction) {
         connect(mOpenReceiverAction, &QAction::triggered, this, &MainWindow::onOpenReceiver);
     }
+    if (mCreateBackupItemsAction) {
+        connect(mCreateBackupItemsAction, &QAction::triggered, this, &MainWindow::onCreateBackup);
+    }
 
     //Manager connections
     TransactionManager *transactionManager = TransactionManager::getInstance();
@@ -365,6 +367,7 @@ void MainWindow::setupConnections()
         connect(itemManager, &ItemManager::itemAdded, this, &MainWindow::updateActions);
         connect(itemManager, &ItemManager::itemsRestored, this, &MainWindow::updateActions);
     }
+
 }
 
 void MainWindow::onOpenReceiver()
