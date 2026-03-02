@@ -48,6 +48,10 @@ Click **Add Item** in the toolbar and enter a name and type (Book or Magazine).
 Click **Create Transaction** in the toolbar. Select a customer, choose items and quantities, then click **Create Transaction**. This option is only enabled once at least one customer and one item exist.
 ![Alt Image](assets/transaction-dialog.png)
 
+## Future Improvement
+- Adding an sql database
+- Adding more options other than magazines and books
+
 ### Restoring Items
 Go to **Data → Restore Items** to restore the item catalog from backup.
 
