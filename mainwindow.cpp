@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     mAboutAction = nullptr;
     mHelpAction = nullptr;
 
-    //qDebug() << "MainWindow constructor done";
     setupUI();
     setupMenus();
     setupToolBar();
@@ -23,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("Store Management System");
     resize(800,600);
 
-    //logMessage("App started");
     updateActions();
 }
 
@@ -78,7 +76,7 @@ void MainWindow::onAddItem()
         } catch (...) {
             QMessageBox::critical(this, "Error", "Exception in addItem()");
         }
-        //logMessage(QString("Item added: %1 (%2)").arg(name, type == Itemtype::Book ? "Book" : "Magazine"));
+
         mStatusBar->showMessage(QString("Item '%1' added").arg(name), 3000);
     }
 }
@@ -104,11 +102,9 @@ void MainWindow::onCreateTransaction()
             }
             try {
                 manager->addTransaction(transaction);
-                //mStatusBar->showMessage(QString("Item '%1' added").arg(name), 3000);
             } catch (...) {
                 QMessageBox::critical(this, "Error", "Exception in addTransaction()");
             }
-            //logMessage(QString("Transaction created for customer: %1").arg(customer->getName()));
             mStatusBar->showMessage("Transaction created", 3000);
         }
     }
