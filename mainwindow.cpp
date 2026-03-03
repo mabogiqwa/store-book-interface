@@ -131,9 +131,6 @@ void MainWindow::onStartBroadcast()
         mStopBroadcastAction->setEnabled(true);
         qDebug() << "mStopBroadcastAction->setEnabled was set to true";
     }
-
-    //logMessage("Broadcasting started");
-    //mStatusBar->showMessage("Broadcasting started");
 }
 
 void MainWindow::onStopBroadcast()
@@ -152,10 +149,6 @@ void MainWindow::onStopBroadcast()
         mStopBroadcastAction->setEnabled(false);
         qDebug() << "Stop broadcast action stopped";
     }
-
-
-    //logMessage("Broadcasting stopped");
-    //mStatusBar->showMessage("Broadcasting stopped", 3000);
 }
 
 void MainWindow::onAbout()
@@ -192,8 +185,6 @@ void MainWindow::onExit()
 void MainWindow::onTransactionAdded()
 {
     mTransactionModel->refreshModel();
-    //mTransactionModel->expandAll();
-    //mTransactionView->resizeColumnToContents(0);
     updateActions();
 }
 
@@ -201,7 +192,6 @@ void MainWindow::onBroadcastSent(const QString &data)
 {
     qDebug() << "onBroadcastSent() was executed?";
     Q_UNUSED(data);
-    //logMessage("Transaction data broadcast sent");
 }
 
 void MainWindow::setupUI()
