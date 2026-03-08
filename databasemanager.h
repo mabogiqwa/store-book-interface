@@ -10,7 +10,7 @@
 class DatabaseManager
 {
 public:
-    static DatabaseManager* getInstance(); //singleton
+    //static DatabaseManager* getInstance(); //singleton
 
 private:
 };

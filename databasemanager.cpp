@@ -1,3 +1,3 @@
 #include "databasemanager.h"
 
-DatabaseManager::DatabaseManager() {}
+//DatabaseManager::DatabaseManager() {}

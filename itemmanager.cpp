@@ -1,4 +1,5 @@
 #include "itemmanager.h"
+#include "databasemanager.h"
 #include <QDebug>
 
 ItemManager* ItemManager::sInstance = nullptr;
