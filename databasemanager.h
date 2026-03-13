@@ -41,7 +41,7 @@ private:
     //Helper functions
     bool customerExists(const QString &name);
     bool itemExists(const QString &name);
-    int getCustomerId(const QString &name);
+    int getCustomerID(const QString &name);
     int getItemID(const QString &name);
 };
 

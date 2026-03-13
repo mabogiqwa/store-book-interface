@@ -48,7 +48,9 @@ bool DatabaseManager::connect(const QString &host, const QString &databaseName, 
 
 void DatabaseManager::disconnect()
 {
-
+    if (mDatabase.isOpen()) {
+        mDatabase.close();
+    }
 }
 
 DatabaseManager::DatabaseManager()
