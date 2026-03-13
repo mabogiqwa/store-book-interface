@@ -67,7 +67,23 @@ int DatabaseManager::getItemID(const QString &name)
 
 bool DatabaseManager::saveTransaction(Transaction *transaction)
 {
-    mDatabase = QSqlDatabase::addDatabase("QMYSQL");
+    if (!transaction || !isConnected())
+        return false;
+
+    Customer *customer = transaction->getCustomer();
+    if (!customer)
+        return false;
+
+    if (!saveCustomer(customer)) //ensures customer record exists in database
+        return false;
+
+    int customerId = getCustomerID(customer->getName());
+    if (customerId == -1) {
+        qDebug() << "Customer id for " << customer->getName() << " could not be found!";
+
+        return false;
+    }
+
 }
 
 bool DatabaseManager::saveAllTransactions()
@@ -78,6 +94,10 @@ bool DatabaseManager::saveAllTransactions()
 bool DatabaseManager::loadTransactions()
 {
 
+}
+
+bool DatabaseManager::saveCustomer(Customer *customer)
+{
 }
 
 bool DatabaseManager::saveItem(Item *item)

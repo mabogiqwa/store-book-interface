@@ -8,6 +8,7 @@
 #include <QString>
 #include "transaction.h"
 #include "item.h"
+#include "customer.h"
 
 class DatabaseManager
 {
@@ -18,6 +19,7 @@ public:
     bool saveTransaction(Transaction *transaction);
     bool saveAllTransactions();
     bool loadTransactions();
+    bool saveCustomer(Customer *customer);
 
     //Items
     bool saveItem(Item *item);
