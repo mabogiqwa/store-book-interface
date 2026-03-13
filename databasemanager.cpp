@@ -18,7 +18,14 @@ DatabaseManager::~DatabaseManager()
 
 bool DatabaseManager::customerExists(const QString &name)
 {
-
+    QSqlQuery query(mDatabase);
+    query.prepare("SELECT COUNT(*) FROM customers WHERE name = :name");
+    query.bindValue(":name",name);
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toInt() > 0;
+    }
+    return false;
 }
 
 bool DatabaseManager::itemExists(const QString &name)
@@ -28,12 +35,26 @@ bool DatabaseManager::itemExists(const QString &name)
 
 int DatabaseManager::getCustomerID(const QString &name)
 {
-
+    QSqlQuery query(mDatabase);
+    query.prepare("SELECT id FROM customers WHERE name = :name");
+    query.bindValue(":name",name);
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toInt();
+    }
+    return -1;
 }
 
 int DatabaseManager::getItemID(const QString &name)
 {
-
+    QSqlQuery query(mDatabase);
+    query.prepare("SELECT id FROM items WHERE name = :name");
+    query.bindValue(":name", name);
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toInt();
+    }
+    return -1;
 }
 
 bool DatabaseManager::saveTransaction(Transaction *transaction)
