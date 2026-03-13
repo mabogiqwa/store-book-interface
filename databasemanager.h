@@ -6,11 +6,23 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QString>
+#include "transaction.h"
+#include "item.h"
 
 class DatabaseManager
 {
 public:
-    //static DatabaseManager* getInstance(); //singleton
+    static DatabaseManager* getInstance();
+
+    //Transactions
+    bool saveTransaction(Transaction *transaction);
+    bool saveAllTransactions();
+    bool loadTransactions();
+
+    //Items
+    bool saveItem(Item *item);
+    bool saveAllItems();
+    bool loadItems();
 
 private:
 };
