@@ -66,6 +66,67 @@ bool DatabaseManager::initializeSchema()
     if (!isConnected()) {
         return false;
     }
+
+    QSqlQuery query(mDatabase);
+
+    // Customers table
+    if (!query.exec(
+            "CREATE TABLE IF NOT EXISTS customers ("
+            "  id   INT AUTO_INCREMENT PRIMARY KEY,"
+            "  name VARCHAR(255) NOT NULL UNIQUE"
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"))
+    {
+        qDebug() << "Failed to create customers table:"
+                 << query.lastError().text();
+        return false;
+    }
+
+    // Items table
+    // type stored as INT: 0 = Book, 1 = Magazine (mirrors the Itemtype enum)
+    if (!query.exec(
+            "CREATE TABLE IF NOT EXISTS items ("
+            "  id   INT AUTO_INCREMENT PRIMARY KEY,"
+            "  name VARCHAR(255) NOT NULL UNIQUE,"
+            "  type INT          NOT NULL"
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"))
+    {
+        qDebug() << "Failed to create items table:"
+                 << query.lastError().text();
+        return false;
+    }
+
+    // Transactions table
+    if (!query.exec(
+            "CREATE TABLE IF NOT EXISTS transactions ("
+            "  id          INT AUTO_INCREMENT PRIMARY KEY,"
+            "  customer_id INT      NOT NULL,"
+            "  datetime    DATETIME NOT NULL,"
+            "  FOREIGN KEY (customer_id) REFERENCES customers(id)"
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"))
+    {
+        qDebug() << "Failed to create transactions table:"
+                 << query.lastError().text();
+        return false;
+    }
+
+    // Transaction items (line items) table
+    if (!query.exec(
+            "CREATE TABLE IF NOT EXISTS transaction_items ("
+            "  id             INT AUTO_INCREMENT PRIMARY KEY,"
+            "  transaction_id INT NOT NULL,"
+            "  item_id        INT NOT NULL,"
+            "  quantity       INT NOT NULL DEFAULT 1,"
+            "  FOREIGN KEY (transaction_id) REFERENCES transactions(id),"
+            "  FOREIGN KEY (item_id)        REFERENCES items(id)"
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"))
+    {
+        qDebug() << "Failed to create transaction_items table:"
+                 << query.lastError().text();
+        return false;
+    }
+
+    qDebug() << "Schema initialised successfully.";
+    return true;
 }
 
 bool DatabaseManager::connect(const QString &host, const QString &databaseName, const QString &username, const QString &password, int port)
