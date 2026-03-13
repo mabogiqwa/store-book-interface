@@ -24,6 +24,9 @@ public:
     bool saveAllItems();
     bool loadItems();
 
+    //Schema
+    bool initializeSchema();
+
     //Connections
     bool connect(const QString &host, const QString &databaseName, const QString &username, const QString &password, int port = 3306);
     void disconnect();
