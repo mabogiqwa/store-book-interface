@@ -25,6 +25,8 @@ public:
     bool loadItems();
 
 private:
+    static DatabaseManager *sInstance;
+    QSqlDatabase mDatabase;
 };
 
 #endif // DATABASEMANAGER_H
