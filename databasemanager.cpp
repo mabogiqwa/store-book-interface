@@ -30,7 +30,15 @@ bool DatabaseManager::customerExists(const QString &name)
 
 bool DatabaseManager::itemExists(const QString &name)
 {
+    QSqlQuery query(mDatabase);
 
+    query.prepare("SELECT COUNT(*) FROM items WHERE name = :name");
+    query.bindValue(":name", name);
+    query.exec();
+    if (query.next()) {
+        return query.value(0).toInt() > 0;
+    }
+    return false;
 }
 
 int DatabaseManager::getCustomerID(const QString &name)
