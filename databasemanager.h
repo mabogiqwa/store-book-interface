@@ -24,9 +24,25 @@ public:
     bool saveAllItems();
     bool loadItems();
 
+    //Connections
+    bool connect(const QString &host, const QString &databaseName, const QString &username, const QString &password, int port = 3306);
+    void disconnect();
+    bool isConnected() const;
+
+    bool saveAll();
+    bool loadAll();
+
 private:
+    explicit DatabaseManager();
     static DatabaseManager *sInstance;
     QSqlDatabase mDatabase;
+    ~DatabaseManager();
+
+    //Helper functions
+    bool customerExists(const QString &name);
+    bool itemExists(const QString &name);
+    int getCustomerId(const QString &name);
+    int getItemID(const QString &name);
 };
 
 #endif // DATABASEMANAGER_H
